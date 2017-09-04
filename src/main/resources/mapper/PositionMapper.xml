@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jee.mapper.PositionMapper">
+
+    <!-- 查询 -->
+    <select id="getPosition" parameterType="int" resultType="Position">
+        select * from position where id=#{id}
+    </select>
+
+    <!-- 增加 -->
+    <insert id="insertPosition" parameterType="Position" >
+        insert into position (positionName,department_id) values (#{positionName},#{department_id})
+    </insert>
+    <!-- 修改 -->
+    <update id="updatePosition" parameterType="Position" >
+        update position set positionName=#{positionName} where id = #{id}
+    </update>
+    <!-- 删除 -->
+    <delete id="deletePosition" parameterType="int" >
+        delete from position where id = #{id}
+    </delete>
+
+    <!--模糊查询-->
+    <select id="getPositionList" parameterType="int"  resultType="Position">
+        select * from position where department_id=#{department_id}
+    </select>
+</mapper>

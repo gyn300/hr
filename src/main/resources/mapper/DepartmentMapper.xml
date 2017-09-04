@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jee.mapper.DepartmentMapper">
+    <resultMap id="departmentAndPositionMap" type="department">
+    <id column="id" property="id"/>
+    <result column="departmentName" property="departmentName"/>
+    <collection property="positions" ofType="com.jee.po.Position">
+        <id column="position_id" property="id"/>
+        <result column="positionName" property="positionName"/>
+    </collection>
+    </resultMap>
+    <!-- 查询 -->
+    <select id="getDepartment" parameterType="int" resultMap="departmentAndPositionMap">
+        select department.*,position.id position_id,positionName from department,position where department.id = #{id} and department.id=position.department_id
+    </select>
+
+    <!-- 增加 -->
+    <insert id="insertDepartment" parameterType="Department" >
+        insert into department(departmentName) values(#{departmentName})
+    </insert>
+    <!-- 修改 -->
+    <update id="updateDepartment" parameterType="Department" >
+        update department set departmentName=#{departmentName} where id = #{id}
+    </update>
+    <!-- 删除 -->
+    <delete id="deleteDepartment" parameterType="int" >
+        delete from department where id = #{id}
+    </delete>
+
+    <!--模糊查询-->
+    <select id="getDepartmentList"  resultMap="departmentAndPositionMap">
+        select * from department,position where department.id=position.department_id
+    </select>
+    <select id="getOnlyDepartmentList"  resultType="Department">
+        select * from department
+    </select>
+</mapper>

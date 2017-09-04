@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jee.mapper.ObjectionMapper">
+
+    <!-- 查询 -->
+    <select id="getObjectionList" parameterType="int" resultType="Objection">
+        select * from objection where user_id = #{user_id}
+    </select>
+
+    <!-- 增加 -->
+    <insert id="insertObjection" parameterType="Objection" >
+        insert into objection (user_id,content,date) values (#{user_id},#{content},#{date})
+    </insert>
+    <!-- 修改 -->
+    <update id="updateObjection" parameterType="Objection" >
+        update objection set status=#{status} where id = #{id}
+    </update>
+    <!-- 删除 -->
+    <delete id="deleteObjection" parameterType="int" >
+        delete from objection where id = #{id}
+    </delete>
+
+    <!--模糊查询-->
+    <select id="getAllObjectionList"  resultType="Objection">
+        select * from objection
+    </select>
+</mapper>

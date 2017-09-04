@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jee.mapper.ResumeMapper">
+
+    <!-- 查询 -->
+    <select id="getResume" parameterType="int" resultType="Resume">
+        select * from resume where user_id = #{user_id}
+    </select>
+    <!-- 增加 -->
+    <insert id="insertResume" parameterType="Resume" >
+        insert into resume(user_id,name,age,sex,department,position,specialty,experience,education,graduateInstitutions,tel,email,detailExperience,time)
+        values(#{user_id},#{name},#{age},#{sex},#{department},#{position},#{specialty},#{experience},#{education},#{graduateInstitutions},#{tel},#{email},#{detailExperience},#{time})
+    </insert>
+
+    <!-- 修改 -->
+    <update id="updateResume" parameterType="Resume" >
+        update resume set name=#{name},age=#{age},sex=#{sex},department=#{department},position=#{position},specialty=#{specialty},experience=#{experience},education=#{education},graduateInstitutions=#{graduateInstitutions},tel=#{tel},email=#{email},detailExperience=#{detailExperience},checkStatus=#{checkStatus},interviewStatus=#{interviewStatus} where user_id = #{user_id}
+    </update>
+
+    <!-- 删除 -->
+    <delete id="deleteResume" parameterType="int" >
+        delete from resume where id = #{id}
+    </delete>
+
+    <!--模糊查询-->
+    <select id="getResumeList" resultType="Resume">
+        select * from resume
+    </select>
+</mapper>

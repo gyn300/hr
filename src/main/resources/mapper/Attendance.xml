@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jee.mapper.AttendanceMapper">
+
+    <!-- 查询 -->
+    <select id="getAttendance" parameterType="Attendance" resultType="Attendance">
+        select * from attendance where user_id = #{user_id} and date =#{date}
+    </select>
+    <!-- 增加 -->
+    <insert id="insertAttendance" parameterType="Attendance" >
+        insert into attendance(user_id,workTime,offWorkTime,lateStatus,leaveEarlyStatus,date) values(#{user_id},#{workTime},#{offWorkTime},#{lateStatus},#{leaveEarlyStatus},#{date})
+    </insert>
+    <!-- 修改 -->
+    <update id="updateAttendance" parameterType="Attendance" >
+        update attendance set workTime=#{workTime},offWorkTime=#{offWorkTime},lateStatus=#{lateStatus},leaveEarlyStatus=#{leaveEarlyStatus} where id = #{id}
+    </update>
+    <!-- 删除 -->
+    <delete id="deleteAttendance" parameterType="int" >
+        delete from attendance where id = #{id}
+    </delete>
+
+    <!--模糊查询-->
+    <select id="getAttendanceList" parameterType="int"  resultType="Attendance">
+         select * from attendance where user_id=#{user_id}
+    </select>
+    <select id="getAllAttendanceList"  resultType="Attendance">
+        select * from attendance
+    </select>
+</mapper>
